@@ -11,3 +11,4 @@
 2. Вводить команды
 
 
+[![asciicast](https://asciinema.org/a/sUD83Ad3SF9JTZjEtUacFTGkB.png)](https://asciinema.org/a/sUD83Ad3SF9JTZjEtUacFTGkB)
