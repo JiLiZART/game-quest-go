@@ -7,4 +7,3 @@ go:
   - master
 
 script: go test ./cmd/
-install: echo 0
