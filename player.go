@@ -49,6 +49,16 @@ func (p *Player) takeGameItem(item *GameItem) string {
 	return "нельзя взять"
 }
 
+func (p *Player) GetItemNames() []string {
+	gameItemNames := make([]string, len(p.inventory))
+
+	for i, gameItem := range p.inventory {
+		gameItemNames[i] = gameItem.getName()
+	}
+
+	return gameItemNames
+}
+
 func (p *Player) getItemByName(name string) (*GameItem, bool) {
 	if (!p.hasInventory) {
 		return nil, false

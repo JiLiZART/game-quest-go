@@ -1,5 +1,7 @@
 package gameQuest
 
+import "github.com/kataras/iris/core/errors"
+
 type World struct {
 	Player *Player
 
@@ -9,7 +11,7 @@ type World struct {
 	PlaceStreet *Place
 	PlaceHome *Place
 
-	actions []Action
+	Actions []Action
 }
 
 func CreateWorld() *World {
@@ -39,7 +41,7 @@ func CreateWorld() *World {
 		{destination: w.PlaceHome},
 	}
 
-	w.actions = []Action{
+	w.Actions = []Action{
 		createActionLookAround(w),
 		createActionWalk(w),
 		createActionTake(w),
@@ -50,9 +52,38 @@ func CreateWorld() *World {
 	return w
 }
 
-func (w *World) HandleAction(name string, args []string) string {
+func (w *World) GetActionByName(name string) (Action, error) {
+	for _, action := range w.Actions {
+		if action.IsMatch(name) {
+			return action, nil
+		}
+	}
 
-	for _, action := range w.actions {
+	return nil, errors.New("действие не найдено")
+}
+
+func (w *World) GetActionNames() []string {
+	actionNames := make([]string, len(w.Actions))
+
+	for i, action := range w.Actions {
+		actionNames[i] = action.GetName()
+	}
+
+	return actionNames
+}
+
+func (w *World) HandleActionInteractive(name string) string {
+	for _, action := range w.Actions {
+		if action.IsMatch(name) {
+			return action.ExecuteInteractive()
+		}
+	}
+
+	return "неизвестная команда"
+}
+
+func (w *World) HandleAction(name string, args []string) string {
+	for _, action := range w.Actions {
 		if action.IsMatch(name) {
 			return action.Execute(args)
 		}

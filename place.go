@@ -136,6 +136,16 @@ func (p *Place) ItemsMessage() string {
 	return strings.Join(result[:],", ") + ". "
 }
 
+func (p *Place) getNameItemsNames() []string {
+	names := make([]string, len(p.getGameItems()))
+
+	for i, item := range p.getGameItems() {
+		names[i] = item.getName()
+	}
+
+	return names
+}
+
 func (p *Place) getGameItems() []*GameItem {
 	var gameItems []*GameItem
 
@@ -184,4 +194,14 @@ func (p *Place) LookAround() string {
 
 func (p *Place) EnteringMessage() string {
 	return p.enteringMessage + " " + p.ExitsMessage()
+}
+
+func (p *Place) ExitsNames() []string {
+	names := make([]string, len(p.Exits))
+
+	for i, door := range p.Exits {
+		names[i] = door.destination.Name()
+	}
+
+	return names
 }

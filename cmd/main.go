@@ -1,17 +1,34 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 	gQ "gameQuest"
-	"os"
-	"bufio"
+	"gopkg.in/AlecAivazis/survey.v1"
+	"fmt"
 )
 
 var world *gQ.World
 
 func initGame() {
 	world = gQ.CreateWorld()
+}
+
+func updateGame() {
+	answer := ""
+	prompt := &survey.Select{
+		Message: "Выбери действие:",
+		Options: world.GetActionNames(),
+	}
+
+	survey.AskOne(prompt, &answer, nil)
+
+	fmt.Println(handleActionInteractive(answer))
+
+	updateGame()
+}
+
+func handleActionInteractive(actionName string) string {
+	return world.HandleActionInteractive(actionName)
 }
 
 func handleCommand(name string) string {
@@ -24,13 +41,13 @@ func handleCommand(name string) string {
 	return world.HandleAction(args[0], args[1:])
 }
 
-func main() {
-	fmt.Println(">> ")
-
+func main(){
 	initGame()
 
-	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
-		fmt.Println(handleCommand(scanner.Text()))
-	}
+	updateGame()
+
+	//scanner := bufio.NewScanner(os.Stdin)
+	//for scanner.Scan() {
+	//	fmt.Println(handleCommand(scanner.Text()))
+	//}
 }

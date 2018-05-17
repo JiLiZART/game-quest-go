@@ -12,13 +12,19 @@ func createActionLookAround(world *World) *ActionLookAround {
 	return action
 }
 
+func (a *ActionLookAround) GetName() string {
+	return a.name
+}
+
 func (a *ActionLookAround) IsMatch(name string) bool {
 	return a.name == name
 }
 
-func (a *ActionLookAround) Execute(args []string) string {
-	p := a.world.Player.Place
+func (a *ActionLookAround) ExecuteInteractive() string {
+	return a.world.Player.Place.LookAround()
+}
 
-	return p.LookAround()
+func (a *ActionLookAround) Execute(args []string) string {
+	return a.world.Player.Place.LookAround()
 }
 
