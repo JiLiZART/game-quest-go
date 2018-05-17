@@ -1,4 +1,4 @@
-package gameQuest
+package main
 
 type GameItem struct {
 	name string

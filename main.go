@@ -2,15 +2,14 @@ package main
 
 import (
 	"strings"
-	gQ "gameQuest"
 	"gopkg.in/AlecAivazis/survey.v1"
 	"fmt"
 )
 
-var world *gQ.World
+var world *World
 
 func initGame() {
-	world = gQ.CreateWorld()
+	world = CreateWorld()
 }
 
 func updateGame() {

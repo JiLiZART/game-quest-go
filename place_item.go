@@ -1,4 +1,4 @@
-package gameQuest
+package main
 
 import "strings"
 

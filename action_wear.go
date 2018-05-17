@@ -1,4 +1,4 @@
-package gameQuest
+package main
 
 import "gopkg.in/AlecAivazis/survey.v1"
 

@@ -1,4 +1,4 @@
-package gameQuest
+package main
 
 type Action interface {
 	GetName() string

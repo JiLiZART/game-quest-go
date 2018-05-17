@@ -1,4 +1,4 @@
-package gameQuest
+package main
 
 type Door struct {
 	destination *Place

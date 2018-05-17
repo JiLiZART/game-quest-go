@@ -1,4 +1,4 @@
-package gameQuest
+package main
 
 type TakeGameItemAction struct {
 	callback func(item *GameItem, p *Player)

@@ -1,6 +1,6 @@
-package gameQuest
+package main
 
-import "github.com/kataras/iris/core/errors"
+import "errors"
 
 type World struct {
 	Player *Player
